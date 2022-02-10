@@ -6,15 +6,12 @@ import com.coderhouse.model.request.ProductRequest;
 import com.coderhouse.model.response.ProductResponse;
 import com.coderhouse.repository.ProductRepository;
 import com.coderhouse.service.ProductService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -64,20 +61,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse searchById(String id) {
-        try {
-            if (id.equals("0")) {
-                throw ApiRestException.builder().message("El identificador del user debe ser mayor a 0").build();
-            }
-            var dataFromDatabase = productRepository.findByCode(id);
-            if (Objects.isNull(dataFromDatabase)) {
-                throw ApiRestException.builder().message("El producto con id "+ id +" no existe").build();
-            }
-            return ProductBuilder.documentToResponse(dataFromDatabase);
-        } catch (ApiRestException e) {
-            e.printStackTrace();
+    public ProductResponse searchById(String id) throws ApiRestException{
+        if (id.equals("0")) {
+            throw new ApiRestException("El identificador del user debe ser mayor a 0");
         }
-        return null;
+        var dataFromDatabase = productRepository.findByCode(id);
+        if (Objects.isNull(dataFromDatabase)) {
+            throw new ApiRestException("El producto con id "+ id +" no existe");
+        }
+        return ProductBuilder.documentToResponse(dataFromDatabase);
     }
 
     @Override
@@ -91,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
             if (!Objects.isNull(product)) {
                 throw ApiRestException.builder().message("El producto ya existe").build();
             }
-         } catch (ApiRestException e) {
+        } catch (ApiRestException e) {
             e.printStackTrace();
         }
     }

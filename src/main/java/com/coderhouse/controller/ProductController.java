@@ -35,7 +35,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public ProductResponse search(@PathVariable String id) {
+    public ProductResponse search(@PathVariable String id) throws ApiRestException{
         return service.searchById(id);
     }
 

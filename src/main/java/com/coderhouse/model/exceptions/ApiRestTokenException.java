@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor(staticName = "of")
+@AllArgsConstructor()
 public class ApiRestTokenException extends Exception {
 
     private String message;

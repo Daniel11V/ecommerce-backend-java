@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor(staticName = "of")
+@AllArgsConstructor()
 public class ErrorMessage {
     private String message;
 }

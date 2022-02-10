@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: product-v1
+  cloud:
+    config:
+      uri: http://localhost:8888
+  profiles:
+    active: dev
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+
+#spring:
+#  data:
+#    mongodb:
+#      database: coderhouse
+#      host: localhost
+#      port: 27017
+#server:
+#  port: 8080

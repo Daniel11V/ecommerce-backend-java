@@ -20,7 +20,7 @@ public class MessageErrorHandle {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ErrorMessage messageErrorHandle(ApiRestException ex) {
         logger.error(ex);
-        return ErrorMessage.of(ex.getMessage());
+        return new ErrorMessage(ex.getMessage());
     }
 
     @ResponseBody
@@ -28,7 +28,7 @@ public class MessageErrorHandle {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     ErrorMessage messageErrorHandleToken(ApiRestTokenException ex) {
         logger.error(ex);
-        return ErrorMessage.of(ex.getMessage());
+        return new ErrorMessage(ex.getMessage());
     }
 
 }

@@ -16,7 +16,7 @@ public interface ProductService {
 
     List<ProductResponse> searchAll();
 
-    ProductResponse searchById(String id);
+    ProductResponse searchById(String id) throws ApiRestException;
 
     List<ProductResponse> searchByCategory(String category);
 }
